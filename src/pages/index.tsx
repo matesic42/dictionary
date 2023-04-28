@@ -1,10 +1,15 @@
+import Header from "../components/Header";
+import Info from "@/components/Info";
+import { useEffect, useState } from "react";
+function App() {
 
-export default function Home() {
+
   return (
-
-    <div>
-      <h1 className="text-center text-2xl ">Dictionary</h1>
-      </div>
-
-  )
+    <div className="mx-auto mt-8 flex h-screen max-w-screen-lg flex-col items-center justify-start gap-5 px-5">
+      <Header   />
+      <Info />
+    </div>
+  );
 }
+
+export default App;
