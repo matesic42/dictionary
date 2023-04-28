@@ -1,56 +1,80 @@
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 
+interface Props {
+  data: any;
+  sinonim: any;
+}
 
-
-function Info() {
+function Info({ data, sinonim }: Props) {
   return (
-    <div className="mt-5 flex flex-col items-center w-full px-5 text-left">
-      <div className="flex justify-between items-center w-full  gap-5">
+    <div className="mt-5 flex w-full flex-col items-center px-5 text-left">
+      <div className="flex w-full items-center justify-between gap-5">
         <div className="flex flex-col justify-center">
-          <h2 className="text-4xl font-medium">Keyboard</h2>
-          <p className="mt-3 text-2xl text-purple-500">keyfsd</p>
+          <h2 className="text-4xl font-medium">{data[0]?.word}</h2>
+          <p className="mt-3 text-2xl text-purple-500">{data[0]?.phonetic}</p>
         </div>
         <div className="rounded-full bg-purple-800 p-3">
           <BsFillPlayFill className="h-10 w-10" />
         </div>
       </div>
-      <div className="flex mt-5 items-center justify-between w-full gap-2">
+      <div className="mt-5 flex w-full items-center justify-between gap-2">
         <p className="text-xl font-medium">noun</p>
-        <div className="border flex-1 my-5"></div>
+        <div className="my-5 flex-1 border"></div>
       </div>
       <div className="mt-4">
-        <h4 className=" mb-3 text-gray-400  text-2xl tracking-wider">Meaning</h4>
-        <ul>
-          <li>(etc.) A set of keys used to operate a typewriter, computer etc. </li>
-        <li>A component of many instruments including the piano, organ, and harpsichord consisting of usually black and white keys that cause different tones to be produced when struck.</li>
-        <li>A device with keys of a musical keyboard, used to control electronic sound-producing devices which may be built into or separate from the keyboard device.</li>
+        <h4 className=" mb-3 text-2xl  tracking-wider text-gray-400">
+          Meaning
+        </h4>
+        <ul className="ml-10 list-[disc] marker:text-purple-500">
+          {data[0]?.meanings[0].definitions.map((def: any) => (
+            <li className="mb-3" key={def.definition}>
+              {def.definition}
+            </li>
+          ))}
         </ul>
-        <div className="flex items-center space-x-5 flex-row ">
-          <h4 className=" mb-3 text-gray-400 mt-3 text-xl tracking-wider">Synonyms</h4>
-          <p className="font-bold text-purple-500">electonic keyboard</p>
+        <div className="flex flex-row items-center space-x-3 ">
+          <h4 className=" mb-3 mt-3 text-xl tracking-wider text-gray-400">
+            Synonyms
+          </h4>
+          {data[0]?.meanings[1]?.synonyms.map((syn: any) => (
+            <p
+              onClick={() => sinonim(syn)}
+              className="text-purple-500 underline hover:cursor-pointer"
+              key={syn}
+            >
+              {syn}
+            </p>
+          ))}
         </div>
       </div>
-      <div className="flex mt-5 items-center justify-between w-full gap-2">
+      <div className="mt-5 flex w-full items-center justify-between gap-2">
         <p className="text-xl font-medium">verb</p>
-        <div className="border flex-1 my-5"></div>
+        <div className="my-5 flex-1 border"></div>
       </div>
       <div className="mt-4">
-        <h4 className="mb-3 text-gray-400  text-2xl tracking-wider">Meaning</h4>
+        <h4 className=" text-2xl tracking-wider text-gray-400">Meaning</h4>
         <ul>
-          <li>(etc.) A set of keys used to operate a typewriter, computer etc. </li>
+          {data[0]?.meanings[1]?.definitions?.map((def: any) => (
+            <li className="mb-3 " key={def.definition}>
+              {def.definition}
+            </li>
+          ))}
         </ul>
-
       </div>
-      <div className="flex mt-5 items-center justify-between w-full gap-2">
-        <div className="border flex-1 my-5"></div>
+      <div className="mt-5 flex w-full items-center justify-between gap-2">
+        <div className="my-5 flex-1 border"></div>
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row space-x-3">
         <h5>Source</h5>
-        <a href="https://en.wiktionary.org/wiki/keyboard" className="text-purple-500 ml-2">Wiktionary</a>
-      </div>
 
-      
+        <a
+          href={data[0]?.sourceUrls[0]}
+          className="text-purple-500 underline hover:cursor-pointer"
+        >
+          {data[0]?.sourceUrls[0]}
+        </a>
+      </div>
     </div>
   );
 }

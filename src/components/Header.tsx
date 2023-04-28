@@ -1,13 +1,12 @@
-
-
 import { FaSun, FaRegMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 
+interface Props {
+  search: (e: React.FormEvent<HTMLFormElement>) => void;
+}
 
-
-
-function Header( ) {
+function Header( {search}: Props) {
   const { theme, setTheme } = useTheme();
   return (
     <>
@@ -30,7 +29,7 @@ function Header( ) {
       </div>
 
       <div>
-        <form   className="relative mx-auto mt-5  pt-2 text-gray-600">
+        <form onSubmit={(e)=>search(e)} className="relative mx-auto mt-5  pt-2 text-gray-600">
           <label htmlFor="search" className="sr-only">
             Search
           </label>
