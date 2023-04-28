@@ -1,12 +1,19 @@
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 
-interface Props {
+type Props = {
   data: any;
   sinonim: any;
-}
+};
 
 function Info({ data, sinonim }: Props) {
+  const speakWord = (word: string) => {
+    const speech = new SpeechSynthesisUtterance(word);
+    speech.lang = "en-US";
+    window.speechSynthesis.speak(speech);
+  };
+
+
   return (
     <div className="mt-5 flex w-full flex-col items-center px-5 text-left">
       <div className="flex w-full items-center justify-between gap-5">
@@ -14,7 +21,10 @@ function Info({ data, sinonim }: Props) {
           <h2 className="text-4xl font-medium">{data[0]?.word}</h2>
           <p className="mt-3 text-2xl text-purple-500">{data[0]?.phonetic}</p>
         </div>
-        <div className="rounded-full bg-purple-800 p-3">
+        <div
+          onClick={() => speakWord(data[0]?.word)}
+          className="rounded-full bg-purple-800 p-3"
+        >
           <BsFillPlayFill className="h-10 w-10" />
         </div>
       </div>

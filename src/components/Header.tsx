@@ -29,7 +29,7 @@ function Header( {search}: Props) {
       </div>
 
       <div>
-        <form onSubmit={(e)=>search(e)} className="relative mx-auto mt-5  pt-2 text-gray-600">
+        <form  onSubmit={(e)=>search(e)} className=" resize-none relative mx-auto mt-5  pt-2 text-gray-600">
           <label htmlFor="search" className="sr-only">
             Search
           </label>
